@@ -13,7 +13,6 @@ Modified Problem: *
 What is the largest prime factor of the number N?
 '''
 
-# From Project Euler PDF: After first improvement
 def all_prime_factors(n):
 	# 2 is the only even prime, so by treating it separately we can increase
 	# factor with 2 every step.
@@ -21,7 +20,10 @@ def all_prime_factors(n):
 		n /= 2
 	# Start while loop with factor 3
 	factor = 3
-	while n > 1 and factor ** 2 <= n:
+	# Every number n can at most have one prime factor greater than root n.
+	# Hence, use this as the max limit. If it is exceeded, then the final
+	# factor is prime.
+	while factor ** 2 <= n:
 		while n % factor == 0:
 			n /= factor
 			yield factor
