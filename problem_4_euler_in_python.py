@@ -18,14 +18,15 @@ def is_palindrome(n):
 def find_palindromes():
 	'''Returns a list of all palindromes found for the product of two 3-digit
 	numbers.'''
-	for i in range(100, 1000):
-		for j in range(i, 1000):
-			product = i * j
-			if is_palindrome(product):
-				yield product
+	largest_palindrome = 0
+	for i in range(999, 99, -1):
+		for j in range(i, 99, -1):
+			if i * j <= largest_palindrome:
+				break
+			if is_palindrome(i * j) and i * j > largest_palindrome:
+				largest_palindrome = i * j
+	return largest_palindrome
 
-# This script takes ~0.8 secs to complete.
-# The challenge is... if you start from 999 down and break when you find the
-# first value, how do you know that this is the max product?
+# This script takes ~0.015 secs to complete.
 if __name__ == '__main__':
-	print max(find_palindromes())
+	print find_palindromes()
