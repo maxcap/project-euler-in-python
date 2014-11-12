@@ -13,16 +13,21 @@ Modified Problem: *
 What is the largest prime factor of the number N?
 '''
 
-# From Project Euler PDF: Crude Version (with a Pythonic twist)
+# From Project Euler PDF: After first improvement
 def all_prime_factors(n):
 	yield 1
-	factor = 2
+	# 2 is the only even prime, so by treating it separately we can increase
+	# factor with 2 every step.
+	while n % 2 == 0:
+		n /= 2
+		yield 2
+	factor = 3
 	while n > 1:
 		while n % factor == 0:
 			yield factor
 			n /= factor
-		factor += 1
+		factor += 2  # loop over odd only. We dealt with all evens earlier.
 
 if __name__ == '__main__':
-	N = 600851475143
+	N = 600851475144
 	print max(all_prime_factors(N))
